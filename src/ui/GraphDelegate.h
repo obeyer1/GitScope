@@ -13,6 +13,12 @@ public:
 
     static int laneWidth() { return 14; }
 
+    // Upper bound on lanes given screen space. Busy repositories can need
+    // hundreds of lanes; without a cap the graph column grows wider than the
+    // window and pushes every other column out of view. Lanes beyond the cap
+    // are clipped by the cell rect.
+    static int maxDisplayLanes() { return 20; }
+
     void paint(QPainter* painter, const QStyleOptionViewItem& option,
                const QModelIndex& index) const override;
     QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;

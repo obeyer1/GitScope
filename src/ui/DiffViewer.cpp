@@ -47,6 +47,10 @@ DiffViewer::DiffViewer(QWidget* parent) : QWidget(parent)
     header_->setWordWrap(true);
     header_->setTextInteractionFlags(Qt::TextSelectableByMouse);
     header_->setContentsMargins(8, 6, 8, 6);
+    // An explicit minimum stops commit-message content (long unbreakable
+    // lines) from dictating a minimum width that would force the whole
+    // window to grow wider than the screen.
+    header_->setMinimumWidth(1);
 
     fileList_ = new QListWidget(this);
     fileList_->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -110,8 +114,13 @@ void DiffViewer::setDetails(const git::CommitDetails& details)
     const QString summary = QString::fromStdString(details.info.summary);
     if (full.size() > summary.size()) {
         const QString body = full.mid(summary.size()).trimmed();
-        if (!body.isEmpty())
-            html += QStringLiteral("<pre style='margin:6px 0 0 0'>%1</pre>").arg(body.toHtmlEscaped());
+        if (!body.isEmpty()) {
+            // pre-wrap (not <pre>) so long body lines wrap instead of
+            // widening the label.
+            html += QStringLiteral("<div style='white-space:pre-wrap; font-family:monospace; "
+                                   "margin-top:6px'>%1</div>")
+                        .arg(body.toHtmlEscaped());
+        }
     }
     header_->setText(html);
 

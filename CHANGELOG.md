@@ -6,6 +6,16 @@ to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+
+- The commit-graph column is now capped at 20 visible lanes. Repositories
+  with many concurrent branches previously produced a graph column thousands
+  of pixels wide that pushed all other history columns out of view.
+- Long unbreakable commit-message lines no longer force the main window to
+  grow wider than the screen: the message body wraps (`white-space:
+  pre-wrap`) and the details header no longer imposes a content-derived
+  minimum width.
+
 ## [0.1.0] - 2026-07-27
 
 ### Added

@@ -89,7 +89,7 @@ QSize GraphDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIn
     int lanes = 1;
     const QVariant value = index.data(CommitTableModel::GraphRowRole);
     if (value.canConvert<git::GraphRow>())
-        lanes = value.value<git::GraphRow>().laneCount;
+        lanes = std::min(value.value<git::GraphRow>().laneCount, maxDisplayLanes());
     return {laneWidth() * lanes + laneWidth(), std::max(base.height(), 22)};
 }
 

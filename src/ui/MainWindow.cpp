@@ -28,6 +28,8 @@
 #include <QToolBar>
 #include <QUrl>
 
+#include <algorithm>
+
 namespace gitscope::ui {
 
 namespace {
@@ -264,8 +266,9 @@ void MainWindow::loadLog()
         const std::size_t count = commits.size();
         model_->setCommits(std::move(commits), std::move(rows), repo_->decorations());
 
+        const int lanes = std::min(model_->maxLaneCount(), GraphDelegate::maxDisplayLanes());
         commitTable_->setColumnWidth(CommitTableModel::GraphColumn,
-                                     GraphDelegate::laneWidth() * (model_->maxLaneCount() + 1) + 8);
+                                     GraphDelegate::laneWidth() * (lanes + 1) + 8);
         commitTable_->resizeColumnToContents(CommitTableModel::AuthorColumn);
         commitTable_->resizeColumnToContents(CommitTableModel::DateColumn);
         commitTable_->resizeColumnToContents(CommitTableModel::HashColumn);
