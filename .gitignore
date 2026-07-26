@@ -1,0 +1,24 @@
+# Build directories
+build/
+build-*/
+cmake-build-*/
+
+# CMake user-local files
+CMakeUserPresets.json
+compile_commands.json
+
+# Tooling caches
+.cache/
+.ccache/
+
+# Local assistant/tooling settings
+.claude/
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.user
+*.swp
+
+# macOS
+.DS_Store
