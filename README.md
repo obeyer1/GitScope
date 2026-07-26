@@ -9,6 +9,8 @@ diffs. It never modifies your repositories and never touches the network.
 [![CI](https://github.com/obeyer1/GitScope/actions/workflows/ci.yml/badge.svg)](https://github.com/obeyer1/GitScope/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+![GitScope main window: commit graph with colored lanes and ref chips, branch/tag sidebar, and a highlighted diff](docs/screenshot.png)
+
 ## Features
 
 - **Commit graph** — colored lane rendering of branching and merging history,
